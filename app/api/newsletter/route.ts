@@ -27,11 +27,10 @@ export async function POST(req: Request) {
       }
     }
 
-    // LOGGING (For development/demo)
-    console.log("New Newsletter Subscriber:", email);
+
 
     return NextResponse.json(
-      { 
+      {
         message: "Welcome to the vanguard. You'll receive our monthly lab reports soon.",
         status: "success"
       },

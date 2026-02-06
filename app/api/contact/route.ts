@@ -39,12 +39,11 @@ export async function POST(req: Request) {
       }
     }
 
-    // LOGGING (For development/demo)
-    console.log("New Inquiry Received:", { name, email, service, budget, message });
+
 
     // SUCCESS RESPONSE
     return NextResponse.json(
-      { 
+      {
         message: "Your inquiry has been launched into our orbit. Our engineers will reach out within 4 hours.",
         status: "success"
       },
