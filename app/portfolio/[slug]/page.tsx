@@ -1,6 +1,8 @@
-import { getFileBySlug, getAllFilesMetadata } from "@/lib/mdx";
+import { VideoScrollLayout } from "@/components/services/VideoScrollLayout";
+import { VIDEO_STATS } from "@/lib/videoStats";
+import { getAllFilesMetadata, getFileBySlug } from "@/lib/mdx";
+import { ChevronLeft, ExternalLink, Github } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { ChevronLeft, Calendar, User, Briefcase, ExternalLink, Github } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -31,7 +33,8 @@ export default async function ProjectPage({ params }: { params: { slug: string }
     const { meta, content } = await getFileBySlug("projects", slug);
 
     return (
-      <article className="py-20 px-6 max-w-5xl mx-auto">
+      <VideoScrollLayout videoSrc={VIDEO_STATS.portfolio.src} videoStats={VIDEO_STATS.portfolio}>
+        <article className="py-20 px-6 max-w-5xl mx-auto">
         <Link 
           href="/portfolio" 
           className="flex items-center gap-2 text-gold font-bold mb-12 hover:-translate-x-2 transition-transform w-fit"
@@ -64,7 +67,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
             </div>
           </header>
 
-          <aside className="lg:col-span-1 bg-secondary/5 border border-primary/10 rounded-[2.5rem] p-10 flex flex-col gap-8 h-fit">
+          <aside className="lg:col-span-1 bg-white/30 dark:bg-black/80 backdrop-blur-xl border border-primary/10 rounded-[2.5rem] p-10 flex flex-col gap-8 h-fit shadow-lg">
              <div className="flex flex-col gap-2">
                 <span className="text-[10px] font-bold text-gold uppercase tracking-[0.3em]">The Mission</span>
                 <p className="font-bold text-lg">{meta.client}</p>
@@ -90,8 +93,8 @@ export default async function ProjectPage({ params }: { params: { slug: string }
           prose-headings:font-black prose-headings:tracking-tighter prose-headings:italic
           prose-p:text-foreground/70 prose-p:text-xl prose-p:leading-relaxed
           prose-strong:text-gold prose-a:text-gold hover:prose-a:underline
-          prose-blockquote:border-l-gold prose-blockquote:bg-primary/5 prose-blockquote:p-12 prose-blockquote:rounded-3xl prose-blockquote:italic prose-blockquote:text-lg
-          prose-li:text-foreground/70 prose-img:rounded-[3rem] prose-img:border prose-img:border-primary/20"
+          prose-blockquote:border-l-gold prose-blockquote:bg-primary/5 prose-blockquote:p-12 prose-blockquote:rounded-[10px] prose-blockquote:italic prose-blockquote:text-lg
+          prose-li:text-foreground/70 prose-img:rounded-[10px] prose-img:border prose-img:border-primary/20"
         >
           <MDXRemote source={content} />
         </div>
@@ -103,6 +106,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
            </Link>
         </div>
       </article>
+    </VideoScrollLayout>
     );
   } catch (e) {
     notFound();

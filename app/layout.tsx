@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
-import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
-import { Navbar } from "@/components/layout/Navbar";
+import { FloatingDock } from "@/components/layout/FloatingDock";
 import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/Navbar";
+import { ThemeProvider } from "@/components/theme-provider";
+import type { Metadata } from "next";
+import { Outfit } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
+import "./globals.css";
 
-const nunito = Nunito({
+const outfit = Outfit({
   subsets: ["latin"],
-  variable: "--font-nunito",
+  variable: "--font-outfit",
 });
 
 export const metadata: Metadata = {
@@ -77,7 +78,7 @@ export default function RootLayout({
         )}
       </head>
       <body
-        className={`${nunito.variable} font-sans antialiased bg-background text-foreground transition-colors duration-300`}
+        className={`${outfit.variable} font-sans antialiased bg-background text-foreground transition-colors duration-300`}
       >
         <NextTopLoader 
           color="#B8860B"
@@ -98,10 +99,11 @@ export default function RootLayout({
         >
           <div className="flex flex-col min-h-screen">
             <Navbar />
-            <main className="flex-grow pt-20">
+            <main className="flex-grow pt-20 w-full px-[5px]">
               {children}
             </main>
             <Footer />
+            <FloatingDock />
           </div>
         </ThemeProvider>
       </body>

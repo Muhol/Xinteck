@@ -1,6 +1,7 @@
-import { getAllFilesMetadata, ProjectMeta } from "@/lib/mdx";
 import { ProjectGrid } from "@/components/sections/ProjectGrid";
-import { motion } from "framer-motion";
+import { VideoScrollLayout } from "@/components/services/VideoScrollLayout";
+import { VIDEO_STATS } from "@/lib/videoStats";
+import { getAllFilesMetadata, ProjectMeta } from "@/lib/mdx";
 import Link from "next/link";
 
 export const metadata = {
@@ -12,64 +13,88 @@ export default async function PortfolioPage() {
   const projects = await getAllFilesMetadata<ProjectMeta>("projects");
 
   return (
-    <div className="flex flex-col gap-24 py-20">
-      {/* Header */}
-      <section className="px-6">
-        <div className="max-w-7xl mx-auto flex flex-col items-center text-center gap-8">
-          <div className="flex flex-col gap-6">
-            <h1 className="text-sm font-bold tracking-[0.3em] text-gold uppercase text-center w-full">
-              Proof of Excellence
-            </h1>
-            <h2 className="text-6xl md:text-8xl font-black tracking-tighter">
-              OUR <span className="text-gold">LEGACY.</span>
-            </h2>
-            <p className="text-xl text-foreground/60 max-w-3xl mx-auto leading-relaxed">
-              We don't talk about features; we talk about results. 
-              Explore the digital landscapes we've shaped for industry leaders and disruptors.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats / Impact */}
-      <section className="bg-secondary/[0.02] border-y border-primary/10 py-16">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-12">
-            {[
-              { val: "$2B+", label: "Client Revenue Generated" },
-              { val: "100M+", label: "Users Impacted" },
-              { val: "99.9%", label: "Uptime Guaranteed" },
-              { val: "500+", label: "Github Repos Delivered" },
-            ].map((item, i) => (
-              <div key={i} className="flex flex-col gap-2 text-center">
-                 <div className="text-3xl md:text-5xl font-black text-gold tracking-tighter">{item.val}</div>
-                 <div className="text-[10px] font-bold uppercase tracking-widest text-foreground/40">{item.label}</div>
+    <VideoScrollLayout videoSrc={VIDEO_STATS.portfolio.src} videoStats={VIDEO_STATS.portfolio}>
+      <div className="flex flex-col gap-12 md:gap-24 py-12 md:py-20">
+        {/* Hero Section */}
+        <section className="px-6 pt-12 md:pt-20">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-col items-center text-center gap-6 md:gap-8 bg-white/30 dark:bg-black/80 backdrop-blur-xl border border-primary/10 rounded-[10px] p-6 md:p-16 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)]">
+              <div className="flex flex-col gap-4 md:gap-6">
+                <h1 className="text-xs md:text-sm font-bold tracking-[0.3em] text-gold uppercase">
+                  Proof of Excellence
+                </h1>
+                <h2 className="text-4xl md:text-8xl font-black tracking-tighter text-foreground">
+                  OUR <span className="text-gold">LEGACY.</span>
+                </h2>
+                <p className="text-lg md:text-xl text-foreground/60 max-w-3xl mx-auto leading-relaxed">
+                  We don&apos;t talk about features; we talk about results. 
+                  Explore the digital landscapes we&apos;ve shaped for industry leaders and disruptors.
+                </p>
               </div>
-            ))}
-        </div>
-      </section>
+            </div>
+          </div>
+        </section>
 
-      {/* Projects Grid */}
-      <section className="px-6">
-         <div className="max-w-7xl mx-auto">
+        {/* Stats Section */}
+        <section className="px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                { val: "$2B+", label: "Client Revenue Generated" },
+                { val: "100M+", label: "Users Impacted" },
+                { val: "99.9%", label: "Uptime Guaranteed" },
+                { val: "500+", label: "Github Repos Delivered" },
+              ].map((item, i) => (
+                <div 
+                  key={i} 
+                  className="flex flex-col gap-4 text-center bg-white/30 dark:bg-black/80 backdrop-blur-xl border border-primary/10 rounded-[10px] p-6 md:p-8 hover:border-primary/40 transition-all shadow-lg"
+                >
+                  <div className="text-3xl md:text-6xl font-black text-gold tracking-tighter">
+                    {item.val}
+                  </div>
+                  <div className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-foreground/40">
+                    {item.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Projects Grid */}
+        <section className="px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="mb-12 md:mb-16 text-center bg-white/30 dark:bg-black/80 backdrop-blur-xl border border-primary/10 rounded-[10px] p-6 md:p-8 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)]">
+              <h3 className="text-xs md:text-sm font-bold tracking-[0.3em] uppercase text-foreground mb-4">
+                Featured Work
+              </h3>
+              <h4 className="text-3xl md:text-6xl font-black tracking-tighter text-foreground">
+                PROJECTS WE <span className="text-foreground/40">BUILT.</span>
+              </h4>
+            </div>
             <ProjectGrid initialProjects={projects} />
-         </div>
-      </section>
+          </div>
+        </section>
 
-      {/* Collaboration CTA */}
-      <section className="px-6 mb-20 text-center">
-        <div className="max-w-4xl mx-auto flex flex-col gap-12 pt-20 border-t border-primary/10">
-           <h3 className="text-4xl md:text-7xl font-black tracking-tighter">
+        {/* CTA Section */}
+        <section className="px-6 mb-12 md:mb-20">
+          <div className="max-w-7xl mx-auto bg-white/30 dark:bg-black/80 backdrop-blur-xl border border-primary/10 rounded-[10px] p-8 md:p-24 text-center shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)]">
+            <h3 className="text-3xl md:text-7xl font-black tracking-tighter mb-6 md:mb-8 text-foreground">
               HAVE A VISION? <br />
-              <span className="text-gold">LET'S CODE IT.</span>
-           </h3>
-           <Link 
-             href="/contact"
-             className="px-12 py-2 bg-primary text-black font-black text-xl rounded-full hover:bg-gold-hover transition-all mx-auto shadow-2xl shadow-primary/20"
-           >
-             Start Your Journey
-           </Link>
-        </div>
-      </section>
-    </div>
+              <span className="text-gold">LET&apos;S CODE IT.</span>
+            </h3>
+            <p className="text-lg md:text-xl text-foreground/60 max-w-2xl mx-auto mb-8 md:mb-10">
+              Join the ranks of industry leaders who trust us to turn their boldest ideas into reality.
+            </p>
+            <Link 
+              href="/contact"
+              className="inline-flex items-center gap-2 px-8 md:px-12 py-4 md:py-5 bg-foreground text-background font-black rounded-[10px] hover:bg-gold-hover transition-all text-sm md:text-base"
+            >
+              Start Your Journey
+            </Link>
+          </div>
+        </section>
+      </div>
+    </VideoScrollLayout>
   );
 }

@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  subName     String
+  price       String?  // Optional, or used for "Starting at..."
+  description String
+  
+  // Theme
+  themeColor  String
+  gradient    String
+  
+  // Content arrays
+  features    String[]
+  
+  // JSON Blobs for structured content
+  stats       Json     // [{ label: "", val: "" }]
+  
+  // Scrollytelling Sections
+  section1    Json     // { title: "", subtitle: "" }
+  section2    Json
+  section3    Json
+  section4    Json
+  
+  // Detail Sections
+  detailsSection   Json // { title: "", description: "", imageAlt: "" }
+  freshnessSection Json // { title: "", description: "" } (Used for Process/Quality)
+  buyNowSection    Json // { price: "", unit: "", processingParams: [], deliveryPromise: "", returnPolicy: "" }
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

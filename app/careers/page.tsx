@@ -1,8 +1,9 @@
 "use client";
 
+import { VideoScrollLayout } from "@/components/services/VideoScrollLayout";
+import { VIDEO_STATS } from "@/lib/videoStats";
 import { motion } from "framer-motion";
-import { Briefcase, Heart, Coffee, Globe, ArrowRight, Zap, Code, Shield } from "lucide-react";
-import Link from "next/link";
+import { ArrowRight, Code, Coffee, Globe, Heart, Shield, Zap } from "lucide-react";
 
 const benefits = [
   { title: "Remote First", desc: "Work from anywhere in the world with our global-first squad mindset.", icon: Globe },
@@ -20,7 +21,8 @@ const positions = [
 
 export default function CareersPage() {
   return (
-    <div className="flex flex-col gap-24 py-20">
+    <VideoScrollLayout videoSrc={VIDEO_STATS.contact.src} videoStats={VIDEO_STATS.contact}>
+      <div className="flex flex-col gap-24 py-20">
       {/* Hero Section */}
       <section className="px-6">
         <div className="max-w-7xl mx-auto flex flex-col items-center text-center gap-8">
@@ -46,7 +48,7 @@ export default function CareersPage() {
       </section>
 
       {/* Values / Benefits Section */}
-      <section className="bg-secondary/5 py-24 px-6 border-y border-primary/10">
+      <section className="bg-white/30 dark:bg-black/80 backdrop-blur-xl py-24 px-6 border-y border-primary/10">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 flex flex-col gap-4">
              <h3 className="text-sm font-bold tracking-[0.3em] text-gold uppercase">Perks & Benefits</h3>
@@ -60,12 +62,12 @@ export default function CareersPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="p-8 rounded-3xl bg-background border border-primary/10 hover:border-primary/40 transition-all flex flex-col gap-6"
+                className="p-8 rounded-[10px] bg-white/50 dark:bg-background/50 border border-primary/10 hover:border-primary/40 transition-all flex flex-col gap-6"
               >
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-gold">
+                <div className="w-12 h-12 rounded-[10px] bg-primary/10 flex items-center justify-center text-gold">
                    <benefit.icon size={24} />
                 </div>
-                <h5 className="text-xl font-bold">{benefit.title}</h5>
+                <h5 className="text-xl font-bold text-foreground">{benefit.title}</h5>
                 <p className="text-foreground/60 text-sm leading-relaxed">{benefit.desc}</p>
               </motion.div>
             ))}
@@ -89,10 +91,10 @@ export default function CareersPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="group p-8 rounded-[2rem] border border-primary/10 bg-secondary/[0.02] hover:border-primary/40 hover:bg-secondary/[0.05] transition-all flex flex-col md:flex-row justify-between items-center gap-6 cursor-pointer"
+                className="group p-8 rounded-[10px] border border-primary/10 bg-white/30 dark:bg-black/80 backdrop-blur-xl hover:border-primary/40 hover:bg-white/50 dark:hover:bg-black/90 transition-all flex flex-col md:flex-row justify-between items-center gap-6 cursor-pointer shadow-lg"
               >
                 <div className="flex flex-col gap-2">
-                   <h5 className="text-2xl font-bold group-hover:text-gold transition-colors">{pos.title}</h5>
+                   <h5 className="text-2xl font-bold text-foreground group-hover:text-gold transition-colors">{pos.title}</h5>
                    <div className="flex gap-4 text-xs font-bold uppercase tracking-widest text-foreground/40">
                       <span>{pos.dept}</span>
                       <span className="text-gold">•</span>
@@ -101,7 +103,7 @@ export default function CareersPage() {
                       <span>{pos.location}</span>
                    </div>
                 </div>
-                <button className="flex items-center gap-2 text-sm font-bold bg-primary text-black px-8 py-3 rounded-full hover:bg-gold-hover transition-all">
+                <button className="flex items-center gap-2 text-sm font-bold bg-foreground text-background px-8 py-3 rounded-[10px] hover:bg-gold-hover transition-all">
                    Apply Now <ArrowRight size={16} />
                 </button>
               </motion.div>
@@ -112,9 +114,9 @@ export default function CareersPage() {
 
       {/* Culture Section */}
       <section className="px-6 mb-20">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center bg-background border border-primary/20 rounded-[4rem] overflow-hidden p-12 md:p-24">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center bg-white/30 dark:bg-black/80 backdrop-blur-xl border border-primary/20 rounded-[10px] overflow-hidden p-12 md:p-24 shadow-xl">
            <div className="flex flex-col gap-8">
-              <h3 className="text-4xl md:text-7xl font-black tracking-tighter">
+              <h3 className="text-4xl md:text-7xl font-black tracking-tighter text-foreground">
                  OUR CODE <br />
                  <span className="text-gold">IS OUR CRAFT.</span>
               </h3>
@@ -123,18 +125,19 @@ export default function CareersPage() {
                  Our engineers are artists, and our codebases are galleries. We value deep work, 
                  asynchronous communication, and technical excellence over everything else.
               </p>
-              <div className="flex gap-8 wrap opacity-40 grayscale">
+              <div className="flex gap-8 wrap opacity-40 grayscale text-foreground">
                  <Code size={48} />
                  <Shield size={48} />
                  <Zap size={48} />
               </div>
            </div>
-           <div className="aspect-square bg-secondary/10 rounded-[3rem] border border-primary/10 flex items-center justify-center relative overflow-hidden">
+           <div className="aspect-square bg-secondary/10 rounded-[10px] border border-primary/10 flex items-center justify-center relative overflow-hidden">
                <div className="absolute inset-0 bg-gradient-to-tr from-gold/10 to-transparent" />
                <span className="text-gold/5 font-black text-[10rem] rotate-12">FLOW-STATE</span>
            </div>
         </div>
       </section>
     </div>
+    </VideoScrollLayout>
   );
 }

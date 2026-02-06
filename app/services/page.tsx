@@ -1,17 +1,19 @@
 "use client";
 
+import { VideoScrollLayout } from "@/components/services/VideoScrollLayout";
+import { VIDEO_STATS } from "@/lib/videoStats";
 import { motion } from "framer-motion";
-import { 
-  Globe, 
-  Smartphone, 
-  Layers, 
-  Palette, 
-  Cloud, 
-  ChevronRight,
-  Code,
-  Zap,
-  Lock,
-  BarChart
+import {
+    BarChart,
+    ChevronRight,
+    Cloud,
+    Code,
+    Globe,
+    Layers,
+    Lock,
+    Palette,
+    Smartphone,
+    Zap
 } from "lucide-react";
 import Link from "next/link";
 
@@ -55,19 +57,23 @@ const allServices = [
 
 export default function ServicesPage() {
   return (
-    <div className="flex flex-col gap-24 py-20 ">
+    <VideoScrollLayout 
+      videoSrc={VIDEO_STATS.services.src}
+      videoStats={VIDEO_STATS.services}
+    >
+      <div className="flex flex-col gap-24 py-20 ">
       {/* Header Section */}
-      <section className="px-6 text-center max-w-4xl mx-auto">
+      <section className="px-6 text-center max-w-4xl mx-auto pt-20">
         <motion.div
            initial={{ opacity: 0, y: 20 }}
            animate={{ opacity: 1, y: 0 }}
            transition={{ duration: 0.8 }}
-           className="flex flex-col gap-8"
+           className="flex flex-col gap-8 bg-white/30 dark:bg-black/80 backdrop-blur-xl border border-primary/10 rounded-[10px] p-8 md:p-12 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)]"
         >
           <h1 className="text-sm font-bold tracking-[0.3em] text-gold uppercase">
             Our Capabilities
           </h1>
-          <h2 className="text-5xl md:text-8xl font-black tracking-tighter">
+          <h2 className="text-5xl md:text-8xl font-black tracking-tighter text-foreground">
             FULL-STACK <br />
             <span className="text-gold">EXCELLENCE.</span>
           </h2>
@@ -85,42 +91,53 @@ export default function ServicesPage() {
           {allServices.map((service, i) => (
             <motion.div
               key={service.slug}
-              initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className={`flex flex-col lg:flex-row gap-12 p-12 rounded-[3rem] border border-primary/10 hover:border-primary/40 transition-all bg-secondary/[0.02] ${
-                i % 2 !== 0 ? "lg:flex-row-reverse" : ""
+              transition={{ delay: i * 0.1 }}
+              className={`grid grid-cols-1 lg:grid-cols-12 gap-4 ${
+                i % 2 !== 0 ? "lg:direction-rtl" : ""
               }`}
             >
-              <div className="flex-1 flex flex-col gap-8">
-                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-gold">
-                  <service.icon size={32} />
-                </div>
-                <h3 className="text-4xl font-bold tracking-tight">
-                  {service.title}
-                </h3>
-                <p className="text-lg text-foreground/60 leading-relaxed">
-                  {service.description}
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {service.features.map((feature) => (
-                    <div key={feature} className="flex items-center gap-2 text-sm">
-                      <div className="w-1.5 h-1.5 rounded-full bg-gold" />
-                      <span className="font-semibold">{feature}</span>
+              {/* Text Card */}
+              <div className={`lg:col-span-9 ${i % 2 !== 0 ? "lg:order-2" : "lg:order-1"}`}>
+                <div className="h-full p-8 md:p-12 rounded-[10px] border border-primary/10 bg-white/30 dark:bg-black/80 backdrop-blur-xl hover:border-primary/40 transition-all shadow-lg">
+                  <div className="flex flex-col gap-6 h-full">
+                    <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
+                      {service.title}
+                    </h3>
+                    <p className="text-lg text-foreground/60 leading-relaxed">
+                      {service.description}
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+                      {service.features.map((feature) => (
+                        <div key={feature} className="flex items-center gap-3 text-sm text-foreground">
+                          <div className="w-2 h-2 rounded-full bg-gold shrink-0" />
+                          <span className="font-semibold">{feature}</span>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                    <Link
+                      href={`/services/${service.slug}`}
+                      className="mt-auto pt-4 flex items-center gap-2 text-gold font-bold hover:gap-4 transition-all w-fit"
+                    >
+                      Explore Details <ChevronRight size={20} />
+                    </Link>
+                  </div>
                 </div>
-                <Link
-                  href={`/services/${service.slug}`}
-                  className="mt-4 flex items-center gap-2 text-gold font-bold hover:gap-4 transition-all"
-                >
-                  Explore Details <ChevronRight size={20} />
-                </Link>
               </div>
-              <div className="flex-1 min-h-[300px] bg-background border border-primary/10 rounded-3xl overflow-hidden relative group">
-                <div className="absolute inset-0 bg-gradient-to-br from-gold/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="absolute inset-0 flex items-center justify-center opacity-10 group-hover:opacity-20 transition-all scale-100 group-hover:scale-110">
-                   <service.icon size={200} />
+
+              {/* Icon Card - Hidden on mobile */}
+              <div className={`hidden lg:block lg:col-span-3 ${i % 2 !== 0 ? "lg:order-1" : "lg:order-2"}`}>
+                <div className="h-full min-h-[200px] lg:min-h-full p-8 rounded-[10px] border border-primary/10 bg-black/70 dark:bg-white/20 backdrop-blur-xl hover:border-gold/40 transition-all shadow-lg flex items-center justify-center group">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gold/30 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <service.icon 
+                      size={120} 
+                      className="text-gold group-hover:text-gold transition-colors" 
+                      strokeWidth={1}
+                    />
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -129,7 +146,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Why Choose Us Icons */}
-      <section className="py-24 px-6 bg-primary/5">
+      <section className="py-24 px-6 bg-white/30 dark:bg-black/80 backdrop-blur-xl border-y border-primary/10">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
             {[
@@ -139,11 +156,11 @@ export default function ServicesPage() {
               { icon: BarChart, title: "Data Driven", desc: "Built with analytics in mind." },
             ].map((item, i) => (
               <div key={i} className="flex flex-col gap-4 text-center items-center">
-                 <div className="w-20 h-20 rounded-full border border-primary/20 flex items-center justify-center text-gold mb-4 group-hover:bg-primary transition-all">
+                 <div className="w-20 h-20 rounded-[10px] border border-primary/20 flex items-center justify-center text-gold mb-4 group-hover:bg-primary transition-all">
                     <item.icon size={32} />
                  </div>
-                 <h4 className="font-bold text-lg">{item.title}</h4>
-                 <p className="text-sm text-foreground/60">{item.desc}</p>
+                  <h4 className="font-bold text-lg text-foreground">{item.title}</h4>
+                  <p className="text-sm text-foreground/60">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -152,19 +169,20 @@ export default function ServicesPage() {
 
       {/* Contact Prompt */}
       <section className="px-6 mb-20">
-        <div className="max-w-4xl mx-auto text-center flex flex-col gap-10">
-            <h3 className="text-4xl md:text-7xl font-black tracking-tighter">
+        <div className="max-w-4xl mx-auto text-center flex flex-col gap-10 bg-white/30 dark:bg-black/80 backdrop-blur-xl border border-primary/10 rounded-[10px] p-8 md:p-16 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)]">
+            <h3 className="text-4xl md:text-7xl font-black tracking-tighter text-foreground">
               NEED A CUSTOM <br />
               <span className="text-gold">TECH SOLUTION?</span>
             </h3>
             <Link 
               href="/contact"
-              className="px-12 py-2 bg-primary text-black font-black text-xl rounded-full hover:bg-gold-hover transition-all mx-auto"
+              className="px-12 py-2 bg-foreground text-background font-black text-xl rounded-[10px] hover:bg-gold-hover transition-all mx-auto"
             >
               Contact Our Engineers
             </Link>
         </div>
       </section>
     </div>
+    </VideoScrollLayout>
   );
 }

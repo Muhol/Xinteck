@@ -25,7 +25,7 @@ export function ServiceDetail({ title, subtitle, description, features, process,
            className="flex flex-col gap-8"
         >
           <div className="flex items-center gap-4">
-             <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-gold">
+             <div className="w-16 h-16 rounded-[10px] bg-primary/10 flex items-center justify-center text-gold">
                 <Icon size={32} />
              </div>
              <h1 className="text-sm font-bold tracking-[0.3em] text-gold uppercase">{subtitle}</h1>
@@ -37,7 +37,7 @@ export function ServiceDetail({ title, subtitle, description, features, process,
           <p className="text-xl text-foreground/60 leading-relaxed max-w-xl">
             {description}
           </p>
-          <button className="px-10 py-5 bg-primary text-black font-black rounded-2xl w-fit hover:bg-gold-hover transition-all">
+          <button className="px-10 py-5 bg-primary text-black font-black rounded-[10px] w-fit hover:bg-gold-hover transition-all">
              Start Your Project
           </button>
         </motion.div>
@@ -49,7 +49,7 @@ export function ServiceDetail({ title, subtitle, description, features, process,
                initial={{ opacity: 0, y: 10 }}
                animate={{ opacity: 1, y: 0 }}
                transition={{ delay: 0.5 + (i * 0.1) }}
-               className="p-6 rounded-2xl bg-secondary/5 border border-primary/10 flex flex-col gap-3"
+               className="p-6 rounded-[10px] bg-secondary/5 border border-primary/10 flex flex-col gap-3"
              >
                 <CheckCircle2 className="text-gold" size={24} />
                 <span className="font-bold text-sm">{feature}</span>
@@ -68,7 +68,7 @@ export function ServiceDetail({ title, subtitle, description, features, process,
            
            <div className="grid md:grid-cols-4 gap-8">
               {process.map((step, i) => (
-                <div key={i} className="relative flex flex-col gap-6 p-8 bg-background border border-primary/10 rounded-[2rem]">
+                <div key={i} className="relative flex flex-col gap-6 p-8 bg-background border border-primary/10 rounded-[10px]">
                    <span className="text-6xl font-black text-gold/10 absolute top-4 right-8 italic">0{i+1}</span>
                    <h5 className="text-xl font-bold z-10">{step.title}</h5>
                    <p className="text-sm text-foreground/60 leading-relaxed z-10">{step.desc}</p>
@@ -91,7 +91,7 @@ export function ServiceDetail({ title, subtitle, description, features, process,
          </h3>
          <Link 
            href="/contact"
-           className="px-12 py-6 bg-primary text-black font-black text-xl rounded-2xl hover:bg-gold-hover transition-all mx-auto"
+           className="px-12 py-6 bg-primary text-black font-black text-xl rounded-[10px] hover:bg-gold-hover transition-all mx-auto"
          >
            Get a Custom Proposal
          </Link>

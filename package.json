@@ -8,7 +8,11 @@
     "start": "next start",
     "lint": "eslint"
   },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
   "dependencies": {
+    "@prisma/client": "^6.19.2",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.26",
     "gray-matter": "^4.0.3",
@@ -24,12 +28,14 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
+    "@types/node": "20.19.30",
+    "@types/react": "19.2.10",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.0.3",
+    "prisma": "^6.19.2",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "tsx": "^4.21.0",
+    "typescript": "5.9.3"
   }
 }

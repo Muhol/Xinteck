@@ -35,7 +35,7 @@ export function BlogNewsletter() {
   };
 
   return (
-    <section className="bg-primary/5 border border-primary/10 rounded-[4rem] p-12 md:p-24 text-center">
+    <section className="bg-primary/5 border border-primary/10 rounded-[10px] p-12 md:p-24 text-center">
       <div className="max-w-xl mx-auto flex flex-col gap-8">
         <h3 className="text-3xl md:text-5xl font-black tracking-tighter">
           STAY AHEAD OF THE <span className="text-gold underline underline-offset-8">CURVE.</span>
@@ -48,7 +48,7 @@ export function BlogNewsletter() {
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-primary/10 border border-primary/20 p-6 rounded-2xl flex flex-col items-center gap-4"
+            className="bg-primary/10 border border-primary/20 p-6 rounded-[10px] flex flex-col items-center gap-4"
           >
             <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-gold">
                <Clock className="animate-pulse" />
@@ -64,7 +64,7 @@ export function BlogNewsletter() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 placeholder="Your email address"
-                className="flex-1 bg-background border border-primary/20 rounded-2xl px-6 py-4 focus:border-primary outline-none transition-all placeholder:text-foreground/20"
+                className="flex-1 bg-background border border-primary/20 rounded-[10px] px-6 py-4 focus:border-primary outline-none transition-all placeholder:text-foreground/20"
               />
               <button 
                 disabled={status === "loading"}

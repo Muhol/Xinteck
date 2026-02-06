@@ -27,7 +27,7 @@ export default function Error({
            initial={{ rotate: 0 }}
            animate={{ rotate: [0, -10, 10, -10, 0] }}
            transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 2 }}
-           className="w-24 h-24 rounded-[2rem] bg-red-500/10 flex items-center justify-center text-red-500 border border-red-500/20"
+           className="w-24 h-24 rounded-[10px] bg-red-500/10 flex items-center justify-center text-red-500 border border-red-500/20"
         >
            <AlertTriangle size={48} />
         </motion.div>

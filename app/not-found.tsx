@@ -16,7 +16,7 @@ export default function NotFound() {
         <motion.div
            initial={{ scale: 0.9, opacity: 0 }}
            animate={{ scale: 1, opacity: 1 }}
-           className="w-24 h-24 rounded-[2rem] bg-secondary/20 flex items-center justify-center text-gold border border-primary/20"
+           className="w-24 h-24 rounded-[10px] bg-secondary/20 flex items-center justify-center text-gold border border-primary/20"
         >
            <Search size={48} />
         </motion.div>
