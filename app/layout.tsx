@@ -1,6 +1,3 @@
-import { FloatingDock } from "@/components/layout/FloatingDock";
-import { Footer } from "@/components/layout/Footer";
-import { Navbar } from "@/components/layout/Navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
@@ -35,20 +32,7 @@ export const metadata: Metadata = {
     title: "Xinteck | Premium Software Development",
     description: "High-performing software solutions for modern businesses.",
   },
-  icons: {
-    icon: [
-      {
-        url: "/logos/logo-light.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/logos/logo-light.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-    ],
-    shortcut: "/logos/logo-light.png",
-    apple: "/logos/logo-light.png",
-  },
+  // icons: handled by app/icon.png
 };
 
 const gaId = process.env.NEXT_PUBLIC_GA_ID;
@@ -78,7 +62,7 @@ export default function RootLayout({
         )}
       </head>
       <body
-        className={`${outfit.variable} font-sans antialiased bg-background text-foreground transition-colors duration-300`}
+        className={`${outfit.variable} font-sans antialiased text-foreground transition-colors duration-300`}
       >
         <NextTopLoader 
           color="#B8860B"
@@ -97,14 +81,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex flex-col min-h-screen">
-            <Navbar />
-            <main className="flex-grow pt-20 w-full px-[5px]">
-              {children}
-            </main>
-            <Footer />
-            <FloatingDock />
-          </div>
+          {children}
         </ThemeProvider>
       </body>
     </html>
